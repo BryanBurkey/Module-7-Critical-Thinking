@@ -1,0 +1,250 @@
+nrow(project2000)
+nrow(project2015)
+project2000
+getwd()
+project2015
+save.image(file="/Users/bryanburkey/T/RProject4.RData")
+project2015
+project2000
+nrow(project2000)
+nrow(project2015)
+project
+projectR <- project2015[project2015$ISO.Code!="USA"|project2015$ISO.Code!="UZB"|project2015$ISO.Code!="TLS"|project2015$ISO.Code!="SSD"|project2015$ISO.Code!="POL"|project2015$ISO.Code!="OMN"|project2015$ISO.Code!="MNE"|project2015$ISO.Code!="BRN",]
+projectR
+nrow(projectR)
+projectR <- project[project$ISO.Code!="USA"|project$ISO.Code!="UZB"|project$ISO.Code!="TLS"|project$ISO.Code!="SSD"|project$ISO.Code!="POL"|project$ISO.Code!="OMN"|project$ISO.Code!="MNE"|project$ISO.Code!="BRN",]
+nrow(projectR)
+projectR2000 <- projectR[projectR$Year=="2000",]
+projectR2015 <- projectR[projectR$Year=="2015",]
+nrow(projectR2000)
+nrow(projectR2015)
+projectR
+projectR <- project[project$ISO.Code!="USA"&project$ISO.Code!="UZB"&project$ISO.Code!="TLS"&project$ISO.Code!="SSD"&project$ISO.Code!="POL"&project$ISO.Code!="OMN"&project$ISO.Code!="MNE"&project$ISO.Code!="BRN",]
+nrow(projectR)
+projectR2015 <- projectR[projectR$Year=="2015",]
+projectR2000 <- projectR[projectR$Year=="2000",]
+nrow(projectR2000)
+nrow(projectR2015)
+projectR
+nrow(projectR)
+ls()
+write.csv(x=projectR,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/projectRcsv.csv",na="--",quote=FALSE,row.names=FALSE)
+write.csv(x=projectR2000,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/projectR2000csv.csv",na="--",quote=FALSE,row.names=FALSE)
+write.csv(x=projectR2015,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/projectR2015csv.csv",na="--",quote=FALSE,row.names=FALSE)
+write.csv(x=project,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/projectNEWcsv.csv",na="--",quote=FALSE,row.names=FALSE)
+ls()
+write.csv(x=project2000,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/project2000csv.csv",na="--",quote=FALSE,row.names=FALSE)
+write.csv(x=project2015,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/project2015csv.csv",na="--",quote=FALSE,row.names=FALSE)
+nrow(project)
+nrow(projectR)
+nrow(project2000)
+nrow(project2015)
+nrow(projectR2000)
+nrow(projectR2015)
+projectR2000 <- projectR[projectR$Year=="2000",]
+projectR2015 <- projectR[projectR$Year=="2015",]
+nrow(projectR2000)
+nrow(projectR2015)
+projectRC <- projectR2015
+colnames(projectRC) <- c("Country","Year","LfEx15","AdMort15","infantd15","ISO","Nalb15","Ralb15","Ualb15")
+projectRC$Nalb15vs00 <- projectR2015$NATIONAL_ALB-projectR2000$NATIONAL_ALB
+projectRC$Ralb15vs00 <- projectR2015$RURAL_ALB-projectR2000$RURAL_ALB
+projectRC$Ualb15vs00 <- projectR2015$URBAN_ALB-projectR2000$URBAN_ALB
+projectRC$LfEx15vs00 <- projectR2015$Life.expectancy-projectR2000$Life.expectancy
+projectRC$AdMort15vs00 <- projectR2015$Adult.Mortality-projectR2000$Adult.Mortality
+projectRC$infantd15vs00 <- projectR2015$infant.deaths-projectR2000$infant.deaths
+colnames(projectRC) <- c("Country","Year","LfEx15","AdMort15","infantd15","ISO","Nalb15","Ralb15","Ualb15","NalbC","RalbC","UalbC","LfExC","AdMortC","infantdC")
+projectRC
+write.csv(x=projectRC,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/projectRCcsv.csv",na="--",quote=FALSE,row.names=FALSE)
+nrow(projectRC)
+save.image(file="/Users/bryanburkey/T/RProject5.RData")
+getwd()
+ls
+ls()
+cor(projectRC$AdMortC,projectRC$NalbC)
+cor(projectRC$AdMort15,projectRC$Nalb)
+cor(projectRC$AdMort15,projectRC$Nalb15)
+sd(projectRC$Nalb15)
+sd(projectR2000$NATIONAL_ALB)
+mean(projectRC$Nalb15)
+mean(projectR2000$NATIONAL_ALB)
+project
+projectRC
+cor(projectRC$Nalb15,projectRC$LfEx15)
+quantile(project2015$NATIONAL_ALB,prob=c(0,0.25,0.5,0.75,1))
+cor(projectRC$AdMort15,projectRC$Nalb15)
+ls()
+save.image(file="/Users/bryanburkey/T/RProject6.RData")
+quantile(project2015$NATIONAL_ALB,prob=c(0,0.25,0.5,0.75,1))
+quantile(project2015$Life.expectancy,prob=c(0,0.25,0.5,0.75,1))
+quantile(project2015$Adult.Mortality,prob=c(0,0.25,0.5,0.75,1))
+quantile(project2015$infant.deaths,prob=c(0,0.25,0.5,0.75,1))
+NalbBQ <- quantile(project2015$NATIONAL_ALB,prob=c(0,0.25,0.5,0.75,1))
+LfExBQ <- quantile(project2015$Life.expectancy,prob=c(0,0.25,0.5,0.75,1))
+AmortBQ <- quantile(project2015$Adult.Mortality,prob=c(0,0.25,0.5,0.75,1))
+infantdBQ <- quantile(project2015$infant.deaths,prob=c(0,0.25,0.5,0.75,1))
+NalbQ <- NalbBQ
+LfExQ <- LfExBQ
+AdmortQ <- AmortBQ
+infantdQ <- infantdBQ
+NalbQ
+LfExQ
+AdmortQ
+infantdQ
+NalbBQ <- 70
+LfExBQ <- 65
+AdmortBQ <- 224
+infantdBQ <- 21
+projectRC$LfExBQ <- ifelse(test=projectRC$LfEx15<=LfExBQ,yes="Y",no="N")
+projectRC$AdMortBQ <- ifelse(test=projectRC$Admort15>=AdmortBQ,yes="Y",no="N")
+colnames(projectRC) <- c("Country","Year","LfX15","AdM15","id15","ISO","Nalb15","Ralb15","Ualb15","NalbC","RalbC","UalbC","LfXC","AdMC","idC","LfXBQ")
+projectRC
+colnames(projectRC) <- c("Country","Year","LfEx15","AdM15","id15","ISO","Nalb15","Ralb15","Ualb15","NalbC","RalbC","UalbC","LfExC","AdMC","idC","LfExBQ")
+projectRC
+colnames(projectRC) <- c("Country","Year","LfEx15","AdM15","id15","ISO","Nalb15","Ralb15","Ualb15","NalbC","RalbC","UalbC","LfExC","AdMC","idC","LfExBQ")
+projectRC$AdMBQ <- c("NA")
+projectRC$idBQ <- c("NA")
+projectRC$NalbBQ <- c("NA")
+projectRC
+projectRC$AdMBQ <- ifelse(test=projectRC$AdM15>=AdmortBQ,yes="Y",no="N")
+projectRC$idBQ <- ifelse(test=projectRC$id15>=infantdBQ,yes="Y",no="N")
+projectRC$NalbBQ <- ifelse(test=projectRC$Nalb15<=NalbBQ,yes="Y",no="N")
+projectRC
+save.image(file="/Users/bryanburkey/T/RProject7.RData")
+getwd()
+write.csv(x=projectRC,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/projectRCQcsv.csv",na="--",quote=FALSE,row.names=FALSE)
+projectRCQ <- projectRC
+ls()
+cor(projectRCQ$Nalb15,projectRCQ$LfEx15)
+projectR2000
+write.csv(x=projectRC,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/projectRCcsv.csv",na="--",quote=FALSE,row.names=FALSE)
+projectR2000$LfExBQ <- c("NA")
+projectR2000$AdMBQ <- c("NA")
+projectR2000$idBQ <- c("NA")
+projectR2000$NalbBQ <- c("NA")
+projectR2000
+quantile(project2000$NATIONAL_ALB,prob=c(0,0.25,0.5,0.75,1))
+quantile(project2000$Life.expectancy,prob=c(0,0.25,0.5,0.75,1))
+quantile(project2000$Adult.Mortality,prob=c(0,0.25,0.5,0.75,1))
+quantile(project2000$infant.deaths,prob=c(0,0.25,0.5,0.75,1))
+NalbBQ00 <- 60.5
+LfExBQ00 <- 57.8
+AdmortBQ00 <- 249.5
+infantdBQ00 <- 30
+projectR2000$LfExBQ00 <- ifelse(test=projectR2000$Life.expectancy<=LfExBQ00,yes="Y",no="N")
+projectR2000$AdMBQ <- ifelse(test=projectR2000$Adult.Mortality>=AdmortBQ00,yes="Y",no="N")
+projectR2000$idBQ <- ifelse(test=projectR2000$infant.deaths>=infantdBQ00,yes="Y",no="N")
+projectRC$NalbBQ <- ifelse(test=projectR2000$NATIONAL_ALB<=NalbBQ00,yes="Y",no="N")
+projectR2000$grad2015 <- c("NA")
+projectR2000
+colnames(projectR2000) <- c("Country","Year","LfEx00","AdM00","id00","ISO","Nalb00","Ralb00","Ualb00","LfExBQ","AdMBQ","idBQ","NalbBQ","LfExBQ00","grad2015")
+projectR2000
+projectR2000$LfExBQ <- ifelse(test=projectR2000$Life.expectancy<=LfExBQ00,yes="Y",no="N")
+projectR2000$LfExBQ <- ifelse(test=projectR2000$LfEx00<=LfExBQ00,yes="Y",no="N")
+projectR2000
+project2000$NalbBQ <- ifelse(test=projectR2000$Nalb00<=NalbBQ00,yes="Y",no="N")
+projectR2000$NalbBQ <- ifelse(test=projectR2000$Nalb00<=NalbBQ00,yes="Y",no="N")
+project2000
+projectR2000
+save.image(file="/Users/bryanburkey/T/RProject8.RData")
+write.csv(x=projectR2000,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/projectR2000NEWcsv.csv",na="--",quote=FALSE,row.names=FALSE)
+projectR2000$grad2015 <- ifelse(test=projectR2000$LfExBQ=="Y" & projectRCQ$LfExBQ=="N",yes="Y",no="N")
+projectR2000$gradAM <- c("NA")
+projectR2000$gradid <- c("NA")
+projectR2000$gradALB <- c("NA")
+projectR2000$gradAM <- ifelse(test=projectR2000$AdMBQ=="Y" & projectRCQ$AdMBQ=="N",yes="Y",no="N")
+projectR2000$gradid <- ifelse(test=projectR2000$idBQ=="Y" & projectRCQ$idBQ=="N",yes="Y",no="N")
+projectR2000$gradALB <- ifelse(test=projectR2000$NalbBQ=="Y" & projectRCQ$NalbBQ=="N",yes="Y",no="N")
+projectR2000
+ncol(projectR2000)
+projectR2000 <- projectR2000[, -c(14)]
+projectR2000
+names(projectR2000)[names(projectR2000) == "grad2015"] <- "gradLfEx"
+projectR2000
+save.image(file="/Users/bryanburkey/T/RProject9.RData")
+write.csv(x=projectR2000,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/projectRgrad2000csv.csv",na="--",quote=FALSE,row.names=FALSE)
+write.csv(x=project2000,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/project2000NEWcsv.csv",na="--",quote=FALSE,row.names=FALSE)
+save.image(file="/Users/bryanburkey/T/RProject9.RData")
+getwd()
+ls()
+nrow(project2015)
+project2015
+nrow(projectRC)
+ncol(projectRC)
+write.csv(x=projectRC,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/projectRC1csv.csv",na="--",quote=FALSE,row.names=FALSE)
+write.csv(x=projectRCQ,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/projectRCQcsv.csv",na="--",quote=FALSE,row.names=FALSE)
+nrow(projectR2000)
+ncol(projectR2000)
+write.csv(x=projectR2000,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/projectR2000csv.csv",na="--",quote=FALSE,row.names=FALSE)
+quantile(projectRC$NalbC)
+quantile(projectRC$Nalb15,prob=0.25)
+ls()
+NalbQ
+quantile(projectRC$Nalb15,prob=0.25)
+projectLQ.Nalb15 <- projectRC[projectRC$Nalb15<=70.5,]
+projectLQ.Nalb15
+NalbQ
+quantile(project2015$NATIONAL_ALB,prob=c(0,0.25,0.5,0.75,1))
+NalbBQ
+projectRC$NalbBQ <- ifelse(test=projectRC$Nalb15<=NalbBQ,yes="Y",no="N")
+projectLQ.Nalb15 <- projectRC[projectRC$Nalb15<=70.5,]
+projectLQ.Nalb15
+projectR2015
+projectR2000
+projectRC
+t.test(x=projectRC$Nalb15,y=projectR2000$Nalb00,alternative="greater",conf.level=0.99)
+t.test(x=projectRC$Nalb15,y=projectR2000$Nalb00,alternative="greater",conf.level=0.95)
+t.test(x=projectRC$Nalb15,y=projectR2000$Nalb00,alternative="greater",conf.level=0.90)
+t.test(x=projectRC$Nalb15,y=projectR2000$Nalb00,alternative="two.sided",conf.level=0.95)
+getwd()
+ls()
+getwd()
+asdfasd
+dsfadf
+5 sdf
+sdf
+k
+ls()
+getwd()
+projectLQ.Nalb15
+load("/Users/bryanburkey/T/RProject9.RData")
+getwd()
+ls()
+getwd()
+ls()
+save.image(file="/Users/bryanburkey/T/RProject10.RData")
+cor(projectRCQ$Nalb15,projectRCQ$LfEx15)
+cor(projectRCQ$Nalb15,projectRCQ$LfEx15)
+plot(projectRCQ$Nalb15,projectRCQ$LfEx15)
+cor(projectRCQ$Nalb15,projectRCQ$LfEx15)
+plot(projectRCQ$Nalb15,projectRCQ$LfEx15)
+lm(Nalb15~LfEx15,data=projectRCQ)
+lm(LfEx15~Nalb15,data=projectRCQ)
+cor(projectRCQ$Nalb15,projectRCQ$LfEx15)
+plot(projectRCQ$Nalb15,projectRCQ$LfEx15)
+lm(LfEx15~Nalb15,data=projectRCQ)
+trendline <- lm(LfEx15~Nalb15,data=projectRCQ)
+abline(trendline,lwd=2)
+projectLQ.Nalb15
+write.csv(x=projectLQ.Nalb15,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/projectLQ.Nalb15csv.csv",na="--",quote=FALSE,row.names=FALSE)
+?abline
+?plot
+t.test(x=projectRC$Nalb15,y=projectR2000$Nalb00,alternative="greater",conf.level=0.99)
+t.test(x=projectRC$Nalb15,y=projectR2000$Nalb00,alternative="greater",conf.level=0.95)
+t.test(x=projectRC$Nalb15,y=projectR2000$Nalb00,alternative="greater",conf.level=0.90)
+t.test(x=projectRC$Nalb15,y=projectR2000$Nalb00,alternative="two.sided",conf.level=0.95)
+t.test(x=projectRC$Nalb15,y=projectR2000$Nalb00,alternative="two.sided",conf.level=0.99)
+1-.99
+.005183 < .01
+sd(projectRC$Nalb15)
+sd(projectR2000$Nalb00)
+sd(projectR2000$Nalb00)/sd(projectRC$Nalb15)
+t.test(x=projectRC$Nalb15,y=projectR2000$Nalb00,alternative="two.sided",conf.level=0.99,var.equal=TRUE)
+projectR2000
+projectR2015
+projectR2015
+graduates2015 <- projectR2000[projectR2000$gradLfEx=="Y"|projectR2000$gradAM=="Y"|projectR2000$gradid=="Y"|projectR2000$gradALB=="Y",]
+graduates2015
+class(graduates2015)
+ls()
+save.image(file="/Users/bryanburkey/T/RProject11.RData")
