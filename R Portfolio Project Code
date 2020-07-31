@@ -1,0 +1,92 @@
+lifex <- read.csv(file=file.choose(), header=TRUE,na.strings="-",stringsAsFactors=FALSE)
+
+water <- read.csv(file=file.choose(), header=TRUE,na.strings="-",stringsAsFactors=FALSE)
+
+project <- merge(life,water,by.x=c(Country","Year"),by.y=c("Countries.and.areas","Year"))
+
+project2000 <- project[project$Year=="2000",]
+
+project2015 <- project[project$Year=="2015",]
+
+projectR <- project2015[project2015$ISO.Code!="USA"|project2015$ISO.Code!="UZB"|project2015$ISO.Code!="TLS"|project2015$ISO.Code!="SSD"|project2015$ISO.Code!="POL"|project2015$ISO.Code!="OMN"|project2015$ISO.Code!="MNE"|project2015$ISO.Code!="BRN",]
+
+projectR2000 <- project[projectR$Year=="2000",]
+
+projectR2015 <- project[projectR$Year=="2015",]
+
+write.csv(x=projectR,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/projectRcsv.csv",na="--",quote=FALSE,row.names=FALSE)
+
+write.csv(x=projectR2000,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/projectR2000csv.csv",na="--",quote=FALSE,row.names=FALSE)
+
+write.csv(x=projectR2015,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/projectR2015csv.csv",na="--",quote=FALSE,row.names=FALSE)
+
+write.csv(x=project,file="/Users/bryanburkey/Documents/MIS/DATASETS/WRITE_CSV/projectNEWcsv.csv",na="--",quote=FALSE,row.names=FALSE)
+
+colnames(projectRC) <- c("Country","Year","LfEx15","AdMort15","infantd15","ISO","Nalb15","Ralb15","Ualb15")
+
+projectRC$Nalb15vs00 <- projectR2015$NATIONAL_ALB-projectR2000$NATIONAL_ALB
+projectRC$Ralb15vs00 <- projectR2015$RURAL_ALB-projectR2000$RURAL_ALB
+projectRC$Ualb15vs00 <- projectR2015$URBAN_ALB-projectR2000$URBAN_ALB
+projectRC$LfEx15vs00 <- projectR2015$Life.expectancy-projectR2000$Life.expectancy
+projectRC$AdMort15vs00 <- projectR2015$Adult.Mortality-projectR2000$Adult.Mortality
+projectRC$infantd15vs00 <- projectR2015$infant.deaths-projectR2000$infant.deaths
+
+colnames(projectRC) <- c("Country","Year","LfEx15","AdMort15","infantd15","ISO","Nalb15","Ralb15","Ualb15","NalbC","RalbC","UalbC","LfExC","AdMortC","infantdC")
+
+quantile(project2015$NATIONAL_ALB,prob=c(0,0.25,0.5,0.75,1))
+quantile(project2015$Life.expectancy,prob=c(0,0.25,0.5,0.75,1))
+quantile(project2015$Adult.Mortality,prob=c(0,0.25,0.5,0.75,1))
+quantile(project2015$infant.deaths,prob=c(0,0.25,0.5,0.75,1))
+
+NalbBQ <- quantile(project2015$NATIONAL_ALB,prob=c(0,0.25,0.5,0.75,1))
+LfExBQ <- quantile(project2015$Life.expectancy,prob=c(0,0.25,0.5,0.75,1))
+AmortBQ <- quantile(project2015$Adult.Mortality,prob=c(0,0.25,0.5,0.75,1))
+infantdBQ <- quantile(project2015$infant.deaths,prob=c(0,0.25,0.5,0.75,1))
+
+NalbQ <- NalbBQ
+LfExQ <- LfExBQ
+AdmortQ <- AmortBQ
+infantdQ <- infantdBQ
+
+NalbQ
+LfExQ
+AdmortQ
+infantdQ
+
+NalbBQ <- 70
+LfExBQ <- 65
+AdmortBQ <- 224
+infantdBQ <- 21
+
+projectRC$AdMBQ <- ifelse(test=projectRC$AdM15>=AdmortBQ,yes="Y",no="N")
+projectRC$idBQ <- ifelse(test=projectRC$id15>=infantdBQ,yes="Y",no="N")
+projectRC$NalbBQ <- ifelse(test=projectRC$Nalb15<=NalbBQ,yes="Y",no="N")
+
+projectRC
+
+cor(projectRCQ$Nalb15,projectRCQ$LfEx15)
+plot(projectRCQ$Nalb15,projectRCQ$LfEx15)
+lm(LfEx15~Nalb15,data=projectRCQ)
+
+trendline <- lm(LfEx15~Nalb15,data=projectRCQ)
+abline(trendline,lwd=2)
+
+projectR2000$grad2015 <- ifelse(test=projectR2000$LfExBQ=="Y" & projectRCQ$LfExBQ=="N",yes="Y",no="N")
+projectR2000$gradAM <- c("NA")
+projectR2000$gradid <- c("NA")
+projectR2000$gradALB <- c("NA")
+projectR2000$gradAM <- ifelse(test=projectR2000$AdMBQ=="Y" & projectRCQ$AdMBQ=="N",yes="Y",no="N")
+projectR2000$gradid <- ifelse(test=projectR2000$idBQ=="Y" & projectRCQ$idBQ=="N",yes="Y",no="N")
+projectR2000$gradALB <- ifelse(test=projectR2000$NalbBQ=="Y" & projectRCQ$NalbBQ=="N",yes="Y",no="N")
+
+projectR2000
+
+graduates2015 <- projectR2000[projectR2000$gradLfEx=="Y"|projectR2000$gradAM=="Y"|projectR2000$gradid=="Y"|projectR2000$gradALB=="Y",]
+
+graduates2015
+
+sd(projectRC$Nalb15)
+sd(projectR2000$Nalb00)
+sd(projectR2000$Nalb00)/sd(projectRC$Nalb15)
+
+t.test(x=projectRC$Nalb15,y=projectR2000$Nalb00,alternative="two.sided",conf.level=0.99,var.equal=TRUE)
